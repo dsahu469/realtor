@@ -142,3 +142,6 @@
 #--------------------------------------------------------------------
 
 # curlrequest.shareOptions = true
+
+# JWT
+TOKEN_SECRET = cskhfuwt48wbfjn3i4utnjf38754hf3yfbjc93758thrjsnf83hcwn8437

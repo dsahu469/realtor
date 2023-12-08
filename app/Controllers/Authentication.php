@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
+use Firebase\JWT\JWT;
 
 use App\Models\EmployeeModel;
 
@@ -73,6 +74,67 @@ class Authentication extends ResourceController
     }
 
     public function login(){
+        $rules = [
+            'email'    => 'required|valid_email',
+            'password' => 'required|min_length[6]'
+        ];
 
+        if (!$this->validate($rules)) {
+            $response = [
+                'status'  => false,
+                'message' => 'Validation failed.',
+                'errors'  => $this->validator->getErrors()
+            ];
+
+            return $this->respond($response, 400);
+        }
+
+        $db      = \Config\Database::connect();
+        $builder = $db->query('SELECT * FROM users WHERE email = "'.$this->request->getPost('email').'"');
+
+        $user = $builder->getRow();
+
+        // echo $db->getLastQuery();
+
+        if(!$user){
+            return $this->respond([
+                'status'  => 'error',
+                'message' => 'Invalid email',
+            ], 401); // Unauthorized
+        }else{
+            if($user->is_active == 'Y'){
+                $pwd_verify = password_verify($this->request->getPost('password'), $user->password);
+
+                if($pwd_verify){
+                    $key = getenv('TOKEN_SECRET');
+                    $iat = time();
+                    $exp = $iat + 3600;
+            
+                    $payload = array(
+                        "iat"   => $iat,
+                        "exp"   => $exp,
+                        "email" => $user->email,
+                    );
+                    
+                    $token = JWT::encode($payload, $key, 'HS256');
+
+                    return $this->respond([
+                        'success' => true,
+                        'message' => 'Login Succesful',
+                        'token'   => $token
+                    ], 200);
+                }else{
+                    return $this->respond([
+                        'status'  => 'error',
+                        'message' => 'Invalid login credentials',
+                    ], 401);
+                }
+            }else{
+                return $this->respond([
+                    'status'  => 'error',
+                    'message' => 'Inactive account',
+                ], 401);
+            }
+        }
     }
 }
