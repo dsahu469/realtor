@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "440e0fa5-32d2-4a53-b1aa-de8a270bafb9",
+		"name": "Realtor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30741756"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Dinesh",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "dinesh1@yopmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone_no",
+							"value": "7063873913",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "text"
+						},
+						{
+							"key": "interest",
+							"value": "1234567890",
+							"type": "text"
+						},
+						{
+							"key": "brokerage",
+							"value": "ABCDEF",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Contai, West Bengal, India - 721401",
+							"type": "text"
+						},
+						{
+							"key": "addr_lat",
+							"value": "21.916700",
+							"type": "text"
+						},
+						{
+							"key": "addr_lon",
+							"value": "87.514862",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "dinesh1@yopmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Whatsapp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyMTY4MDUsImV4cCI6MTcwMjIyMDQwNSwiaWQiOiIxIiwiZW1haWwiOiJkaW5lc2gxQHlvcG1haWwuY29tIn0.DK0MwtenOUz_XuRj8wuwHWwJFVU1BGgG-H7g8y_XWK8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "images[]",
+							"type": "file",
+							"src": [
+								"/Users/dino/Downloads/_.jpeg",
+								"/Users/dino/Downloads/Bursts of Ambient Color.jpeg"
+							]
+						},
+						{
+							"key": "message",
+							"value": "Test Message",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/whatsapp/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"whatsapp",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyMTY4MDUsImV4cCI6MTcwMjIyMDQwNSwiaWQiOiIxIiwiZW1haWwiOiJkaW5lc2gxQHlvcG1haWwuY29tIn0.DK0MwtenOUz_XuRj8wuwHWwJFVU1BGgG-H7g8y_XWK8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/whatsapp/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"whatsapp",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Current Location",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyMTY4MDUsImV4cCI6MTcwMjIyMDQwNSwiaWQiOiIxIiwiZW1haWwiOiJkaW5lc2gxQHlvcG1haWwuY29tIn0.DK0MwtenOUz_XuRj8wuwHWwJFVU1BGgG-H7g8y_XWK8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "address",
+							"value": "Contai, West Bengal",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "21.916700",
+							"type": "text"
+						},
+						{
+							"key": "lon",
+							"value": "87.514862",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/user/update/address",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"update",
+						"address"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
