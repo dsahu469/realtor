@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Filters;
-
+ 
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Config\Services;
 
 class Auth implements FilterInterface
@@ -32,16 +33,32 @@ class Auth implements FilterInterface
         $header = $request->getServer('HTTP_AUTHORIZATION');
         
         if(!$header) return Services::response()
-        ->setJSON(['msg' => 'Token Required'])
+        ->setJSON([
+            'status'  => false,
+            'message' => 'Token Required'
+        ])
         ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);
         
         $token = explode(' ', $header)[1];
 
+        // try {
+        //     // $decoded = JWT::decode($token, $key, array("HS256"));
+        //     $decoded = JWT::decode($token, new Key($key, 'HS256'));
+        // } catch (Exception $ex) {
+        //     $response = service('response');
+        //     $response->setBody('Access denied');
+        //     $response->setStatusCode(401);
+        //     return $response;
+        // }
+
         try {
-            JWT::decode($token, $key, ['HS256']);
+            JWT::decode($token, new Key($key, 'HS256'));
         } catch (\Throwable $th) {
             return Services::response()
-            ->setJSON(['msg' => 'Invalid Token'])
+            ->setJSON([
+                'status'  => false,
+                'message' => 'Invalid Token'
+            ])
             ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);
         }
     }

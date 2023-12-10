@@ -1,5 +1,6 @@
 <?php 
 namespace App\Controllers;
+
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use Firebase\JWT\JWT;
@@ -113,6 +114,7 @@ class Authentication extends ResourceController
                     $payload = array(
                         "iat"   => $iat,
                         "exp"   => $exp,
+                        "id"    => $user->id,
                         "email" => $user->email,
                     );
                     
