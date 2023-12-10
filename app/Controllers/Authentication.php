@@ -24,6 +24,7 @@ class Authentication extends ResourceController
             'address'   => 'required',
             'addr_lat'  => 'required',
             'addr_lon'  => 'required',
+            'user_type' => 'required'
         ];
 
         if (!$this->validate($rules)) {
@@ -48,6 +49,7 @@ class Authentication extends ResourceController
         $address      = $this->request->getPost('address');
         $addr_lat     = $this->request->getPost('addr_lat');
         $addr_lon     = $this->request->getPost('addr_lon');
+        $type         = $this->request->getPost('user_type');
 
         // Insert user data into database
         $db      = \Config\Database::connect();
@@ -63,6 +65,7 @@ class Authentication extends ResourceController
             'address'   => $address,
             'addr_lat'  => $addr_lat,
             'addr_lon'  => $addr_lon,
+            'user_type' => $type,
             'cr_date'   => time(),
         ]);
 
@@ -116,24 +119,25 @@ class Authentication extends ResourceController
                         "exp"   => $exp,
                         "id"    => $user->id,
                         "email" => $user->email,
+                        "type"  => $user->user_type
                     );
                     
                     $token = JWT::encode($payload, $key, 'HS256');
 
                     return $this->respond([
-                        'success' => true,
+                        'status'  => true,
                         'message' => 'Login Succesful',
                         'token'   => $token
                     ], 200);
                 }else{
                     return $this->respond([
-                        'status'  => 'error',
+                        'status'  => false,
                         'message' => 'Invalid login credentials',
                     ], 401);
                 }
             }else{
                 return $this->respond([
-                    'status'  => 'error',
+                    'status'  => false,
                     'message' => 'Inactive account',
                 ], 401);
             }

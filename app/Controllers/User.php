@@ -71,10 +71,64 @@ class User extends ResourceController
             ->update($dataToUpdate);
 
         return $this->respond([
-            'status'          => 'success',
+            'status'          => true,
             'message'         => 'Location updated successfully.',
             // 'uploaded_images' => $uploadedImages,
         ], 201); // Created
+    }
+
+    function getRealtor(){
+        $token = explode(' ', $this->request->getHeaderLine('Authorization'))[1];
+        $key   = getenv('TOKEN_SECRET');
+
+        // Validate JWT token
+        try {
+            $decoded = JWT::decode($token, new Key($key, 'HS256'));
+        } catch (\Exception $e) {
+            return $this->respond([
+                'status'  => false,
+                'message' => 'Invalid token: ' . $e->getMessage(),
+            ], 401); // Unauthorized
+        }
+        // $query->getFirstRow();
+
+        if($decoded->type == 'REALTOR'){
+            return $this->respond([
+                'status'  => false,
+                'message' => 'This API is for users only',
+            ], 401);
+        }
+
+        $rules = [
+            'lat' => 'required',
+            'lon' => 'required'
+        ];
+
+        if (!$this->validate($rules)) {
+            $response = [
+                'status'  => false,
+                'message' => 'Validation failed.',
+                'errors'  => $this->validator->getErrors()
+            ];
+
+            return $this->respond($response, 400);
+        }
+
+        $lat = $this->request->getPost('lat');
+        $lon = $this->request->getPost('lon');
+
+        $sql = "SELECT id, address, name, phone_no, addr_lat, addr_lon, cur_address, cur_lat, cur_lon,
+        6371 * ACOS( COS(RADIANS($lat)) * COS(RADIANS(addr_lat)) * COS(RADIANS(addr_lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(addr_lat)) ) AS distance FROM users WHERE 6371 * ACOS( COS(RADIANS($lat)) * COS(RADIANS(addr_lat)) * COS(RADIANS(addr_lon) - RADIANS($lon)) + SIN(RADIANS($lat)) * SIN(RADIANS(addr_lat)) ) <= 20 AND id != ".$decoded->id." AND user_type = 'REALTOR' ORDER BY distance";
+
+        $db    = \Config\Database::connect();
+        $query = $db->query($sql);
+
+        $realtor = $query->getResult();
+
+        return $this->respond([
+            'status'  => true,
+            'realtor' => $realtor
+        ], 200);
     }
     
     public function index()

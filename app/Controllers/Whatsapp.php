@@ -112,7 +112,7 @@ class Whatsapp extends ResourceController
 
         // Respond with success message and uploaded image names
         return $this->respond([
-            'status'          => 'success',
+            'status'          => true,
             'message'         => 'Message added successfully.',
             // 'uploaded_images' => $uploadedImages,
         ], 201); // Created
