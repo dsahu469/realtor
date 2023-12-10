@@ -1,0 +1,343 @@
+{
+	"info": {
+		"_postman_id": "a8a767fd-16e7-48cf-a235-0361ef24c223",
+		"name": "Realtor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Dinesh",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "dinesh@yopmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone_no",
+							"value": "7063873913",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "text"
+						},
+						{
+							"key": "interest",
+							"value": "1234567890",
+							"type": "text"
+						},
+						{
+							"key": "brokerage",
+							"value": "ABCDEF",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Contai, West Bengal, India - 721401",
+							"type": "text"
+						},
+						{
+							"key": "addr_lat",
+							"value": "21.916700",
+							"type": "text"
+						},
+						{
+							"key": "addr_lon",
+							"value": "87.514862",
+							"type": "text"
+						},
+						{
+							"key": "user_type",
+							"value": "USER",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "dinesh@yopmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Whatsapp",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyMTY4MDUsImV4cCI6MTcwMjIyMDQwNSwiaWQiOiIxIiwiZW1haWwiOiJkaW5lc2gxQHlvcG1haWwuY29tIn0.DK0MwtenOUz_XuRj8wuwHWwJFVU1BGgG-H7g8y_XWK8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "images[]",
+							"type": "file",
+							"src": [
+								"/Users/dino/Downloads/_.jpeg",
+								"/Users/dino/Downloads/Bursts of Ambient Color.jpeg"
+							]
+						},
+						{
+							"key": "message",
+							"value": "Test Message",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/whatsapp/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"whatsapp",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyMTY4MDUsImV4cCI6MTcwMjIyMDQwNSwiaWQiOiIxIiwiZW1haWwiOiJkaW5lc2gxQHlvcG1haWwuY29tIn0.DK0MwtenOUz_XuRj8wuwHWwJFVU1BGgG-H7g8y_XWK8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/whatsapp/messages",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"whatsapp",
+						"messages"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Current Location",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyMTY4MDUsImV4cCI6MTcwMjIyMDQwNSwiaWQiOiIxIiwiZW1haWwiOiJkaW5lc2gxQHlvcG1haWwuY29tIn0.DK0MwtenOUz_XuRj8wuwHWwJFVU1BGgG-H7g8y_XWK8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "address",
+							"value": "Contai, West Bengal",
+							"type": "text"
+						},
+						{
+							"key": "lat",
+							"value": "21.916700",
+							"type": "text"
+						},
+						{
+							"key": "lon",
+							"value": "87.514862",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/user/update/address",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"update",
+						"address"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Near Realtors",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyNDAxOTgsImV4cCI6MTcwMjI0Mzc5OCwiaWQiOiIyIiwiZW1haWwiOiJkaW5lc2hAeW9wbWFpbC5jb20iLCJ0eXBlIjoiVVNFUiJ9.1ufSgwOmH2aVN-4g42i1G6CZhDY1pj9PfRcmd7BISXA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "lat",
+							"value": "21.916700",
+							"type": "text"
+						},
+						{
+							"key": "lon",
+							"value": "87.514862",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/users/realtor",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"realtor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Contact",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyNDAxOTgsImV4cCI6MTcwMjI0Mzc5OCwiaWQiOiIyIiwiZW1haWwiOiJkaW5lc2hAeW9wbWFpbC5jb20iLCJ0eXBlIjoiVVNFUiJ9.1ufSgwOmH2aVN-4g42i1G6CZhDY1pj9PfRcmd7BISXA"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "lat",
+							"value": "21.916700",
+							"type": "text"
+						},
+						{
+							"key": "lon",
+							"value": "87.514862",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/api/users/update/contacts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"update",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contacts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MDIyNDAxOTgsImV4cCI6MTcwMjI0Mzc5OCwiaWQiOiIyIiwiZW1haWwiOiJkaW5lc2hAeW9wbWFpbC5jb20iLCJ0eXBlIjoiVVNFUiJ9.1ufSgwOmH2aVN-4g42i1G6CZhDY1pj9PfRcmd7BISXA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/api/users/contacts",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
